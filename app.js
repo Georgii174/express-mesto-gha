@@ -4,7 +4,6 @@ const userRouter = require('./routes/users.js');
 const cardRouter = require('./routes/cards.js');
 const NotFoundError = require('./errors/NotFoundError.js');
 const messages = require('./errors/const.js');
-const createUser = require('./controllers/users.js');
 const errors = require('./errors/index.js')
 const { PORT = 3000 } = process.env;
 
@@ -21,8 +20,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
 
 app.use(express.json());
 app.use('/users', userRouter.usersRoutes);
-// app.use('/cards', createUser);
-// app.post('/signup', createUser);
+app.use('/cards', cardRouter.cardsRoutes);
+// app.post('/signup', cardRouter.cardsRoutes);
 app.use((req, res, next) => {
   next(new NotFoundError(messages.common.notFound));
 });

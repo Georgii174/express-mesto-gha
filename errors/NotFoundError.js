@@ -1,4 +1,4 @@
-const statusCode = require('./const.js');
+const statuses = require('./const.js');
 
 class NotFoundError extends Error {
   constructor(message){
@@ -7,7 +7,7 @@ class NotFoundError extends Error {
   }
 
   static sandError({ res, message}) {
-    res.status(statusCode.NotFound).send({ message});
+    res.status(statuses.statusCode.NotFound).send({ message});
   }
 }
 

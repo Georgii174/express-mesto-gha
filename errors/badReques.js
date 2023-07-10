@@ -8,7 +8,7 @@ class BadRequestError extends Error {
   };
 
   static sendError({ res, message, payload}) {
-    res.status(statuses.badRequest).send({ message, payload});
+    res.status(statuses.statusCode.badRequest).send({ message, payload});
   };
 };
 

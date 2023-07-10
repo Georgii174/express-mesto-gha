@@ -1,6 +1,6 @@
 const User = require('../models/users.js');
 const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
-const messages = require('../errors/const.js');
+const { messages } = require('../errors/const.js');
 
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
@@ -10,7 +10,7 @@ const createUser = (req, res) => {
     .catch((error) => {
       if (error.name === 'ValidationError') {
         BadRequestError
-          .sendError({ res, message: messages.user.badData });
+          .sendError({ res, message: messages.user.createBadData });
         return;
       }
       handleDefaultError(res);
