@@ -2,12 +2,13 @@ const statuses = require('./const.js');
 
 class NotFoundError extends Error {
   constructor(message){
+    super(message);
     this.name = 'NotFoundError';
-    this.statusCode = statusCode.NotFound;
+    this.statusCode = statuses.statusCode.notFound;
   }
 
   static sandError({ res, message}) {
-    res.status(statuses.statusCode.NotFound).send({ message});
+    res.status(statuses.statusCode.notFound).send({ message});
   }
 }
 
