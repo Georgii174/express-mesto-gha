@@ -73,6 +73,11 @@ const updateUser = (req, res) => {
       .sendError({res, message: messages.common.badId});
       return;
     }
+    if (error.name === 'ValidationError') {
+      BadRequestError
+        .sendError({ res, message: messages.user.updateBadData });
+      return;
+    }
     handleDefaultError(res);
   });
 };
