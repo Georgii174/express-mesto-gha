@@ -2,7 +2,7 @@ const Card = require('../models/cards.js');
 const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
 const { messages } = require('../errors/const.js');
 
-export const createCard = (req, res) => {
+const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
 
@@ -18,13 +18,13 @@ export const createCard = (req, res) => {
     });
 };
 
-export const getCards = (req, res) => {
+const getCards = (req, res) => {
   Card.find({})
   .then((cards) => res.send(cards))
   .catch(() => handleDefaultError(res));
 };
 
-export const deleteCard = (req, res) => {
+const deleteCard = (req, res) => {
   const { cardId } = req.params;
   Card.findByIdAndRemove(cardId)
   .orFail(() => {
@@ -48,7 +48,7 @@ export const deleteCard = (req, res) => {
   });
 };
 
-export const likeCard = (req, res) => {
+const likeCard = (req, res) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId,
     { $addToset: {likes: req.user._id}},
@@ -75,7 +75,7 @@ export const likeCard = (req, res) => {
   });
 };
 
-export const dislikeCard = (req, res) => {
+const dislikeCard = (req, res) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId,
     { $pull: {likes: req.user._id}},
@@ -101,3 +101,7 @@ export const dislikeCard = (req, res) => {
     handleDefaultError(res);
   });
 };
+
+module.exports = {
+  createCard, getCards, deleteCard, likeCard, dislikeCard
+}

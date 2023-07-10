@@ -16,4 +16,7 @@ router.patch('/me/avatar', updateUser);
 
 //module.exports = { usersRoutes };
 
-export { router as usersRoutes};
+//export { router as usersRoutes};
+module.exports = {
+  usersRoutes: router
+}
