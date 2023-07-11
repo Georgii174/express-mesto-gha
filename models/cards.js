@@ -8,6 +8,11 @@ const cardSchema = new mongoose.Schema({
     maxLength: 30,
   },
 
+  link: {
+    type: String,
+    required: true,
+  },
+
   like: {
     type: String,
     required: true,
@@ -32,4 +37,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-const Card = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('card', cardSchema);

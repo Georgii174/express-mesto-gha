@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 app.use('/users', userRouter.usersRoutes);
 app.use('/cards', cardRouter.cardsRoutes);
-// app.post('/signup', cardRouter.cardsRoutes);
+//app.post('/signup', cardRouter.cardsRoutes);
 app.use((req, res, next) => {
   next(new NotFoundError(messages.common.notFound));
 });

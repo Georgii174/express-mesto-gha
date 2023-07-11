@@ -14,9 +14,6 @@ router.post('/', createUser);
 router.patch('/me', updateUser);
 router.patch('/me/avatar', updateUser);
 
-//module.exports = { usersRoutes };
-
-//export { router as usersRoutes};
 module.exports = {
   usersRoutes: router
 }
