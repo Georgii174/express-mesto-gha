@@ -7,7 +7,9 @@ const createCard = (req, res) => {
   const owner = req.user._id;
 
   Card.create({ name, link, owner })
-    .then((card) => res.send(card))
+    .then((card) => {
+      return res.send(card)
+    })
     .catch((error) => {
       if (error.name === 'ValidationError') {
         BadRequestError
@@ -52,14 +54,14 @@ const deleteCard = (req, res) => {
 const likeCard = (req, res) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId,
-    { $addToset: {likes: req.user._id}},
+    { $addToSet: {likes: req.user._id}},
     { new: true },
     )
   .orFail(() => {
-    throw new NotFoundError();
+        throw new NotFoundError();
   })
   .then((card) => {
-    res.send(card);
+res.send(card);
   })
   .catch((error) => {
     if(error instanceof NotFoundError) {

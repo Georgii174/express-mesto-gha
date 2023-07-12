@@ -10,13 +10,13 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
-.then(() => {
-  console.log('Connected!')
-})
-.catch((error) => {
-  console.log('No Connected!', error)
-})
-;
+  .then(() => {
+    console.log('Connected!')
+  })
+  .catch((error) => {
+    console.log('No Connected!', error)
+  })
+  ;
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -31,11 +31,11 @@ app.use('/users', userRouter.usersRoutes);
 app.use('/cards', cardRouter.cardsRoutes);
 //app.post('/signup', cardRouter.cardsRoutes);
 app.use((req, res, next) => {
-  next(new NotFoundError(messages.common.notFound));
+  NotFoundError
+    .sandError({ res, message: messages.common.notFound });
 });
 app.use(errors.handleDefaultError);
 
-
 app.listen(PORT, () => {
-    console.log(`Запуск сервера`);
+  console.log(`Запуск сервера`);
 });
