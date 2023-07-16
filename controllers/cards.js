@@ -2,7 +2,7 @@ const Card = require('../models/cards.js');
 const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
 const { messages } = require('../errors/const.js');
 
-const createCard = (req, res) => {
+const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
 
@@ -10,99 +10,62 @@ const createCard = (req, res) => {
     .then((card) => {
       return res.send(card)
     })
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        BadRequestError
-          .sendError({ res, message: messages.card.badData });
-        return;
-      }
-      handleDefaultError(res);
-      // next(error)
-    });
+    .catch(next);
 };
 
-const getCards = (req, res) => {
+const getCards = (req, res, next) => {
   Card.find({})
   .then((cards) => res.send(cards))
-  .catch(() => handleDefaultError(res));
+  .catch(next);
 };
 
-const deleteCard = (req, res) => {
+const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findByIdAndRemove(cardId)
+  Card.findById(cardId)
   .orFail(() => {
-    throw new NotFoundError();
+    throw new NotFoundError(messages.card.notFound);
   })
-  .then(() => {
-    res.send({message: messages.card.delete});
+  .then((card) => {
+    if (card.owner.toString() !== req.user._id){
+      throw new ForbiddenError('Удалять можно только свою карточку');
+    }
+    Card.findByIdAndRemove(cardId)
+    .then(() => {
+      res.send({message: messages.card.delete});
+    })
+    .catch(next);
   })
-  .catch((error) => {
-    if(error instanceof NotFoundError) {
-      NotFoundError
-      .sandError({res, message: messages.card.notFound});
-      return;
-    }
-    if(error.name === 'CastError') {
-      BadRequestError
-      .sendError({res, message: messages.common.badId});
-      return;
-    }
-    handleDefaultError(res);
-  });
+  .catch(next);
 };
 
-const likeCard = (req, res) => {
+const likeCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId,
     { $addToSet: {likes: req.user._id}},
     { new: true },
     )
   .orFail(() => {
-        throw new NotFoundError();
+        throw new NotFoundError(messages.card.notFound);
   })
   .then((card) => {
 res.send(card);
   })
-  .catch((error) => {
-    if(error instanceof NotFoundError) {
-      NotFoundError
-      .sandError({res, message: messages.card.notFound});
-      return;
-    }
-    if(error.name === 'CastError') {
-      BadRequestError
-      .sendError({res, message: messages.common.badId});
-      return;
-    }
-    handleDefaultError(res);
-  });
+  .catch(next);
 };
 
-const dislikeCard = (req, res) => {
+const dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId,
     { $pull: {likes: req.user._id}},
     { new: true },
     )
   .orFail(() => {
-    throw new NotFoundError();
+    throw new NotFoundError(messages.card.notFound);
   })
   .then((card) => {
     res.send(card);
   })
-  .catch((error) => {
-    if(error instanceof NotFoundError) {
-      NotFoundError
-      .sandError({res, message: messages.card.notFound});
-      return;
-    }
-    if(error.name === 'CastError') {
-      BadRequestError
-      .sendError({res, message: messages.common.badId});
-      return;
-    }
-    handleDefaultError(res);
-  });
+  .catch(next);
 };
 
 module.exports = {

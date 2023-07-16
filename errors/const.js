@@ -10,6 +10,8 @@ const messages = {
     createBadData: 'Переданы некорректные данные при создании пользователя',
     updateBadData: ' Переданы некорректные данные при обновлении профиля',
     updataWrongFields: 'Переданы некорректные поля для обновлении пользователя',
+    loginBadData: 'Передан неверный логин или пароль',
+    conflictEmail: 'Пользователь с указанным email уже существует',
   },
 
   card: {
@@ -21,7 +23,10 @@ const messages = {
 
 const statusCode = {
   badRequest: 400,
+  unauthorized: 401,
+  forbidden: 403,
   notFound: 404,
+  conflict: 409,
   default: 500,
 };
 
