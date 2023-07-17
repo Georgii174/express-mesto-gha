@@ -6,15 +6,15 @@ const signupCelebrate = celebrate({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().regex(imageLinkRegex),
-    email: Joi.string().require().email(),
-    password: Joi.string().require(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
   }),
 });
 
 const signinCelebrate = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().require().email(),
-    password: Joi.string().require(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
   })
 });
 
