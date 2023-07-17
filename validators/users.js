@@ -1,4 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
+const { imageLinkRegex } = require('../errors/regex.js');
 
 const signupCelebrate = celebrate({
   body: Joi.object().keys({

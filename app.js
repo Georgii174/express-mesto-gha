@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-perser');
+//const cookieParser = require('cookie-perser');
 const { errors } = require('celebrate')
 const userRouter = require('./routes/users.js');
 const cardRouter = require('./routes/cards.js');
 const { NotFoundError } = require('./errors/NotFoundError.js');
 const { messages } = require('./errors/const.js');
-const errors = require('./errors/index.js')
+//const errors = require('./errors/index.js')
 const { PORT = 3000 } = process.env;
 const { createUser, login } = require('./controllers/users.js');
 const { authMiddleware } = require('./middlewares/auth.js');
