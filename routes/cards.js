@@ -6,6 +6,10 @@ const {
   likeCard,
   dislikeCard,
 } = require('../controllers/cards.js');
+const {
+  cardIdCelebrate,
+  createCardCelebrate
+} = require('../validators/cards.js');
 
 const router = express.Router();
 

@@ -5,6 +5,11 @@ const {
   getUserById,
   updateUser,
 } = require('../controllers/users.js');
+const {
+  updateAvatarCelebrate,
+  updateUserCelebrate,
+  userIdCelebrate,
+} = require('../validators/users.js');
 
 const router = express.Router();
 
