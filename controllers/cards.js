@@ -29,7 +29,7 @@ const deleteCard = (req, res, next) => {
     if (card.owner.toString() !== req.user._id){
       throw new ForbiddenError('Удалять можно только свою карточку');
     }
-    Card.findByIdAndRemove(cardId)
+    Card.deleteOne(card)
     .then(() => {
       res.send({message: messages.card.delete});
     })

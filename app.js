@@ -25,7 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
 
 app.use(express.json());
 app.use(cookieParser());
-app.post('/singup', signupCelebrate, createUser);
+app.post('/signup', signupCelebrate, createUser);
 app.post('/signin', signinCelebrate, login);
 
 app.use('/users', userRouter.usersRoutes);

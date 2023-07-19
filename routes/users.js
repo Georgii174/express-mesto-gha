@@ -9,10 +9,10 @@ const {
 const router = express.Router();
 
 router.get('/', getUsers);
-router.get('/:userId', getUserById);
+router.get('/:userId', userIdCelebrate, getUserById);
 router.post('/', createUser);
-router.patch('/me', updateUser);
-router.patch('/me/avatar', updateUser);
+router.patch('/me', updateUserCelebrate, updateUser);
+router.patch('/me/avatar', updateAvatarCelebrate, updateUser);
 
 module.exports = {
   usersRoutes: router
