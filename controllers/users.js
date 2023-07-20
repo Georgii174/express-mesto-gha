@@ -4,7 +4,7 @@ const User = require('../models/users.js');
 const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
 const { UnauthorizedError } = require('../errors/unauthorized.js');
 const { messages } = require('../errors/const.js');
-const { JWT_SECRT } = require('../envConfig.js');
+const { JWT_SECRET } = require('../envConfig.js');
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
@@ -83,7 +83,7 @@ const login = (req, res, next) => {
           }
           const token = jwt.sign(
             { _id: user._id },
-            JWT_SECRT,
+            JWT_SECRET,
             { expiresIn: '7d' },
           );
           res

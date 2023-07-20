@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { UnauthorizedError } = require('../errors/unauthorized.js');
-const { JWT_SECRT } = require('../envConfig.js');
+const { JWT_SECERT } = require('../envConfig.js');
 
 const authMiddleware = (req, res, next) => {
   const { jwt: token } = req.cookies;
@@ -17,7 +17,7 @@ const authMiddleware = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRT);
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
     throw new UnauthorizedError('Необходима авторизация');
   }
