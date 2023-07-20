@@ -100,5 +100,5 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
-  createUser, getUsers, getUserById, updateUser, login
+  createUser, getUsers, getUserById, updateUser, login, getCurrentUser
 }

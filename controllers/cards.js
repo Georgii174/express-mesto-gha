@@ -1,5 +1,6 @@
 const Card = require('../models/cards.js');
 const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
+const { ForbiddenError } = require('../errors/ForbiddenError')
 const { messages } = require('../errors/const.js');
 
 const createCard = (req, res, next) => {

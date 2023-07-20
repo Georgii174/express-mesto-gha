@@ -4,6 +4,7 @@ const {
   getUsers,
   getUserById,
   updateUser,
+  getCurrentUser
 } = require('../controllers/users.js');
 const {
   updateAvatarCelebrate,
@@ -14,6 +15,7 @@ const {
 const router = express.Router();
 
 router.get('/', getUsers);
+router.get('/me', getCurrentUser);
 router.get('/:userId', userIdCelebrate, getUserById);
 router.post('/', createUser);
 router.patch('/me', updateUserCelebrate, updateUser);

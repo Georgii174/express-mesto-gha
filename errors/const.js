@@ -21,7 +21,7 @@ const messages = {
   },
 };
 
-const statusCode = {
+const statusCodes = {
   badRequest: 400,
   unauthorized: 401,
   forbidden: 403,
@@ -30,4 +30,4 @@ const statusCode = {
   default: 500,
 };
 
-module.exports = { messages, statusCode}
+module.exports = { messages, statusCodes}
