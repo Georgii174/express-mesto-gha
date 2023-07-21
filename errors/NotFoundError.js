@@ -1,15 +1,15 @@
-const statuses = require('./const.js');
+const statuses = require('./const');
 
 class NotFoundError extends Error {
-  constructor(message){
+  constructor(message) {
     super(message);
     this.name = 'NotFoundError';
     this.statusCode = statuses.statusCodes.notFound;
   }
 
-  static sandError({ res, message}) {
-    res.status(statuses.statusCodes.notFound).send({ message});
+  static sandError({ res, message }) {
+    res.status(statuses.statusCodes.notFound).send({ message });
   }
 }
 
-module.exports = { NotFoundError }
+module.exports = { NotFoundError };

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 2,
     maxLength: 30,
-    default: "Жак-Ив Кусто",
+    default: 'Жак-Ив Кусто',
   },
 
   about: {
@@ -15,13 +15,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 2,
     maxLength: 30,
-    default: "Исследователь",
+    default: 'Исследователь',
   },
 
   avatar: {
     type: String,
     required: true,
-    default: "https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png",
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
   },
 
   email: {
@@ -31,15 +31,14 @@ const userSchema = new mongoose.Schema({
     validate: {
       validator: (v) => validator.isEmail(v),
       message: 'Неправильный формат почты',
-    }
+    },
   },
 
   password: {
     type: String,
     required: true,
     select: false,
-  }
+  },
 });
-
 
 module.exports = mongoose.model('user', userSchema);

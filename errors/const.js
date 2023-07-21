@@ -30,4 +30,4 @@ const statusCodes = {
   default: 500,
 };
 
-module.exports = { messages, statusCodes}
+module.exports = { messages, statusCodes };

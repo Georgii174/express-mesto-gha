@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { imageLinkRegex } = require('../errors/regex.js');
+const { imageLinkRegex } = require('../errors/regex');
 
 const createCardCelebrate = celebrate({
   body: Joi.object().keys({
@@ -14,4 +14,4 @@ const cardIdCelebrate = celebrate({
   }),
 });
 
-module.exports = { createCardCelebrate, cardIdCelebrate }
+module.exports = { createCardCelebrate, cardIdCelebrate };

@@ -1,4 +1,4 @@
-const statuses = require('./const.js');
+const statuses = require('./const');
 
 class ForbiddenError extends Error {
   constructor(message) {
@@ -8,4 +8,4 @@ class ForbiddenError extends Error {
   }
 }
 
-module.exports = { ForbiddenError }
+module.exports = { ForbiddenError };

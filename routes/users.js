@@ -1,16 +1,16 @@
-const express = require("express");
+const express = require('express');
 const {
   createUser,
   getUsers,
   getUserById,
   updateUser,
-  getCurrentUser
-} = require('../controllers/users.js');
+  getCurrentUser,
+} = require('../controllers/users');
 const {
   updateAvatarCelebrate,
   updateUserCelebrate,
   userIdCelebrate,
-} = require('../validators/users.js');
+} = require('../validators/users');
 
 const router = express.Router();
 
@@ -22,5 +22,5 @@ router.patch('/me', updateUserCelebrate, updateUser);
 router.patch('/me/avatar', updateAvatarCelebrate, updateUser);
 
 module.exports = {
-  usersRoutes: router
-}
+  usersRoutes: router,
+};

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { UnauthorizedError } = require('../errors/unauthorized.js');
-const { JWT_SECRET } = require('../envConfig.js');
+const { UnauthorizedError } = require('../errors/unauthorized');
+const { JWT_SECRET } = require('../envConfig');
 
 const authMiddleware = (req, res, next) => {
   const { jwt: token } = req.cookies;
@@ -24,6 +24,6 @@ const authMiddleware = (req, res, next) => {
 
   req.user = payload;
   next();
-}
+};
 
-module.exports = { authMiddleware }
+module.exports = { authMiddleware };

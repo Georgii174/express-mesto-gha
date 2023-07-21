@@ -5,11 +5,11 @@ class BadRequestError extends Error {
     super(message);
     this.name = BadRequestError;
     this.statusCode = statuses.statusCodes.badRequest;
-  };
+  }
 
-  static sendError({ res, message, payload}) {
-    res.status(statuses.statusCodes.badRequest).send({ message, payload});
-  };
-};
+  static sendError({ res, message, payload }) {
+    res.status(statuses.statusCodes.badRequest).send({ message, payload });
+  }
+}
 
-module.exports = { BadRequestError }
+module.exports = { BadRequestError };

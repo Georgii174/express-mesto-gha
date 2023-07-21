@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { imageLinkRegex } = require('../errors/regex.js');
+const { imageLinkRegex } = require('../errors/regex');
 
 const signupCelebrate = celebrate({
   body: Joi.object().keys({
@@ -15,7 +15,7 @@ const signinCelebrate = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-  })
+  }),
 });
 
 const updateUserCelebrate = celebrate({
@@ -37,4 +37,6 @@ const userIdCelebrate = celebrate({
   }),
 });
 
-module.exports = { signupCelebrate, signinCelebrate, updateUserCelebrate, updateAvatarCelebrate, userIdCelebrate}
+module.exports = {
+  signupCelebrate, signinCelebrate, updateUserCelebrate, updateAvatarCelebrate, userIdCelebrate,
+};

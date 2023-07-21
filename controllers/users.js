@@ -1,19 +1,27 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/users.js');
-const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index.js');
-const { UnauthorizedError } = require('../errors/unauthorized.js');
-const { messages } = require('../errors/const.js');
-const { JWT_SECRET } = require('../envConfig.js');
+const User = require('../models/users');
+const { handleDefaultError, NotFoundError, BadRequestError } = require('../errors/index');
+const { UnauthorizedError } = require('../errors/unauthorized');
+const { messages } = require('../errors/const');
+const { JWT_SECRET } = require('../envConfig');
 
 const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
 
   bcrypt.hash(password, 10)
-    .then((hash) => User.create({ name, about, avatar, email, password: hash, }))
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then((user) => {
-      const { _id, name, about, avatar, email, } = user;
-      res.send({ _id, name, about, avatar, email, });
+      const {
+        _id, name, about, avatar, email,
+      } = user;
+      res.status(201).send({
+        _id, name, about, avatar, email,
+      });
     })
     .catch(next);
 };
@@ -30,9 +38,7 @@ const getUserById = async (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(messages.user.notFound);
     })
-    .then((user) =>
-      res.send(user)
-    )
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -43,9 +49,7 @@ const getCurrentUser = async (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(messages.user.notFound);
     })
-    .then((user) =>
-    res.send(user)
-    )
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -61,9 +65,7 @@ const updateUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError();
     })
-    .then((user) =>
-      res.send(user)
-    )
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -100,5 +102,5 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
-  createUser, getUsers, getUserById, updateUser, login, getCurrentUser
-}
+  createUser, getUsers, getUserById, updateUser, login, getCurrentUser,
+};
