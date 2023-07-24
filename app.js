@@ -6,6 +6,7 @@ const cardRouter = require('./routes/cards');
 const userRouter = require('./routes/users');
 const { NotFoundError } = require('./errors/NotFoundError');
 const { messages } = require('./errors/const');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const { createUser, login } = require('./controllers/users');
@@ -26,11 +27,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(requestLogger);
+
 app.post('/signup', signupCelebrate, createUser);
 app.post('/signin', signinCelebrate, login);
 app.use(authMiddleware);
 app.use('/users', userRouter.usersRoutes);
 app.use('/cards', cardRouter.cardsRoutes);
+
+app.use(errorLogger); // подключаем логгер ошибок
+
+app.use(errors()); // обработчик ошибок celebrate
+
 app.use((req, res, next) => {
   next(new NotFoundError(messages.common.notFound));
 });
